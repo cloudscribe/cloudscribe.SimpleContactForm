@@ -1,0 +1,16 @@
+﻿@model cloudscribe.SimpleContactForm.Models.ContactFormMessage
+
+@{
+    Layout = "_LayoutEmailNotification";
+    ViewData["Title"] = "Thanks for your comment";
+}
+<h3  style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">
+   Website Comment
+</h3>
+<div style="font: 11pt/1.5 calibri, arial;">
+ <br />
+    Name:  @Model.Name <br />
+    E-mail:  @Model.Email <br />
+    <br /><br /><hr />
+    @Model.Message
+</div>

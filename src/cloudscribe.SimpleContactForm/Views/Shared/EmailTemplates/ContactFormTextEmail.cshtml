@@ -1,0 +1,14 @@
+﻿@model cloudscribe.SimpleContactForm.Models.ContactFormMessage
+
+@{
+    Layout = "_LayoutTextEmailNotification";
+    ViewData["Title"] = "Website Comment";
+}
+
+Website Comment
+
+Name:  @Html.Raw(Model.Name )
+E-mail:  @Html.Raw(Model.Email)
+IP-address: @Html.Raw(Model.IpAddress)
+   
+@Html.Raw(Model.Message)
