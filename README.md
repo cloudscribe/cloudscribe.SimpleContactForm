@@ -1,2 +1,44 @@
 # cloudscribe.SimpleContactForm
 a simple yet flexible contact form for ASP.NET Core
+
+It uses recaptcha unless you are authenticated.
+
+Additional content and styling can be customized in /Views/Contact/index.cshtml
+
+The Notification templates are under Views/Shared/EmailTemplates and they can be customized as well.
+
+It uses the submitted email address in the "replyto" of the notification email so that it may be possible to reply to the submitter from the notification message depending on email system and whether it supports replyto.
+
+There is an option to copy the submitter with the email notification, this is set to true by default. The submitter notification uses different email templates to leave out the ipaddress information and to allow it to be customized independently of the admin notification.
+
+It supports up to 12 additional custom fields named CustomField1 through CustomField12. Those can be added to the index.cshtml to add more fields to the form and to the notification templates. You can of course use custom labels within the cshtml files so the custom fields can be labelled any way you like.
+
+See appsettings.json in the WebApp for configuration, these are the settings:
+
+    "ContactFormSettings": {
+    "Id": "default",
+    "NotificationEmailCsv": "",
+    "NotificationSubject": "Contact Form Submission",
+    "CopySubmitterEmailOnSubmission": "true"
+      },
+      "SmtpOptions": {
+        "Server": "",
+        "Port": "25",
+        "User": "",
+        "Password": "",
+        "UseSsl": "false",
+        "RequiresAuthentication": "false",
+        "DefaultEmailFromAddress": "",
+        "DefaultEmailFromAlias": ""
+      },
+      "RecaptchaKeys": {
+        "PublicKey": "",
+        "PrivateKey": ""
+      },
+      "SmtpMessageProcessorOptions": {
+        "NotificationTextViewName": "EmailTemplates/ContactFormTextEmail",
+        "NotificationHtmlViewName": "EmailTemplates/ContactFormHtmlEmail",
+        "SubmitterNotificationTextViewName": "EmailTemplates/ContactFormSubmitterTextEmail",
+        "SubmitterNotificationHtmlViewName": "EmailTemplates/ContactFormSubmitterHtmlEmail"
+      }
+	  

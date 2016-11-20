@@ -250,3 +250,8 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+**/dp_keys/**
+**/nodb_storage/**
+**/wwwroot/lib*
+**/appsettings.dev.json
