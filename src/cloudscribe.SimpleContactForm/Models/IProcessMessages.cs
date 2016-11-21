@@ -4,7 +4,7 @@ namespace cloudscribe.SimpleContactForm.Models
 {
     public interface IProcessMessages
     {
-        Task Process(ContactFormMessage message);
+        Task<MessageResult> Process(ContactFormMessage message);
 
     }
 }

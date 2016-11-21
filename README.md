@@ -5,6 +5,8 @@ It uses recaptcha unless you are authenticated.
 
 Additional content and styling can be customized in /Views/Contact/index.cshtml
 
+It uses a strongly typed message model and Razor views for rendering both the html and plain text email body.
+
 The Notification templates are under Views/Shared/EmailTemplates and they can be customized as well.
 
 It uses the submitted email address in the "replyto" of the notification email so that it may be possible to reply to the submitter from the notification message depending on email system and whether it supports replyto.

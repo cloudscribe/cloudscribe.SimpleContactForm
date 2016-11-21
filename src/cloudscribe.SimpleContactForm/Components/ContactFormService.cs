@@ -83,8 +83,17 @@ namespace cloudscribe.SimpleContactForm.Components
             {
                 try
                 {
-                    await processor.Process(message).ConfigureAwait(false);
-                    successCount += 1;
+                    var tempResult = await processor.Process(message).ConfigureAwait(false);
+                    if(tempResult.Succeeded)
+                    {
+                        successCount += 1;
+                    }
+                    else
+                    {
+                        failureCount += 1;
+                        errorList.AddRange(tempResult.Errors);
+                    }
+                    
                 }
                 catch(Exception ex)
                 {

@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. 
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2016-11-20
+// Last Modified:			2016-11-21
 // 
 
 using cloudscribe.Messaging.Email;
@@ -41,12 +41,13 @@ namespace cloudscribe.SimpleContactForm.Components
         private ILogger log;
 
 
-        public async Task Process(ContactFormMessage message)
+        public async Task<MessageResult> Process(ContactFormMessage message)
         {
             var form = await contactFormResolver.GetCurrentContactForm().ConfigureAwait(false);
             var smtpOptions = await smtpOptionsProvider.GetSmtpOptions().ConfigureAwait(false);
+            var errorList = new List<MessageError>();
 
-            if(string.IsNullOrEmpty(smtpOptions.Server))
+            if (string.IsNullOrEmpty(smtpOptions.Server))
             {
                 throw new InvalidOperationException("smtp settings are not configured");
             }
@@ -66,7 +67,7 @@ namespace cloudscribe.SimpleContactForm.Components
                     smtpOptions,
                     form.NotificationEmailCsv,
                     smtpOptions.DefaultEmailFromAddress,
-                    form.NotificationEmailCsv,
+                    message.Subject,
                     plainTextMessage,
                     htmlMessage,
                     replyTo
@@ -90,7 +91,7 @@ namespace cloudscribe.SimpleContactForm.Components
                             smtpOptions,
                             message.Email,
                             smtpOptions.DefaultEmailFromAddress,
-                            form.NotificationEmailCsv,
+                            message.Subject,
                             plainTextMessage,
                             htmlMessage
                             ).ConfigureAwait(false);
@@ -98,6 +99,10 @@ namespace cloudscribe.SimpleContactForm.Components
                     catch (Exception ex)
                     {
                         log.LogError("error sending contact form submitter notification email", ex);
+                        var m = new MessageError();
+                        m.Code = "SubmitterNotificationError";
+                        m.Description = ex.Message;
+                        errorList.Add(m);
                     }
 
                 }
@@ -105,9 +110,18 @@ namespace cloudscribe.SimpleContactForm.Components
             catch (Exception ex)
             {
                 log.LogError("error sending contact form notification email: " + ex.Message, ex);
+                var m = new MessageError();
+                m.Code = "NotificationError";
+                m.Description = ex.Message;
+                errorList.Add(m);
             }
 
-            
+            if(errorList.Count > 0)
+            {
+                return MessageResult.Failed(errorList.ToArray());
+            }
+
+            return MessageResult.Success;
 
         }
     }
