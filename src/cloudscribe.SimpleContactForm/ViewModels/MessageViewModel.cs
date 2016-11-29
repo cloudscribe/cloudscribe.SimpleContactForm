@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2016-11-20
+// Last Modified:			2016-11-21
 // 
 
 using System.ComponentModel.DataAnnotations;
@@ -11,19 +11,19 @@ namespace cloudscribe.SimpleContactForm.ViewModels
 {
     public class MessageViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "The FormId field is required.")]
         public string FormId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Name field is required.")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Email field is required.")]
         [EmailAddress]
         public string Email { get; set; }
 
         public string Subject { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Message field is required.")]
         public string Message { get; set; }
 
         public string RecaptchaPublicKey { get; set; } = string.Empty;
