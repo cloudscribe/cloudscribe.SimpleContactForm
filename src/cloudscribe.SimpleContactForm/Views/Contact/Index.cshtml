@@ -8,8 +8,14 @@
 {
     <script src='https://www.google.com/recaptcha/api.js'></script>
 }
+@if (Model.UseInvisibleCaptcha)
+{
+    <script>
+        function onCaptchaSubmit(token) { document.getElementById("contact-form").submit(); }
+    </script>
+}
 <h2>@ViewData["Title"]</h2>
-<form asp-controller="Contact" asp-action="Index" method="post" class="form-horizontal" role="form">
+<form id="contact-form" asp-controller="Contact" asp-action="Index" method="post" class="form-horizontal" role="form">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="FormId" type="hidden" />
     <div class="form-group">
@@ -37,7 +43,7 @@
             <span asp-validation-for="Message" class="text-danger"></span>
         </div>
     </div>
-    @if (Model.RecaptchaPublicKey.Length > 0)
+    @if (Model.RecaptchaPublicKey.Length > 0 && !Model.UseInvisibleCaptcha)
     {
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -48,7 +54,15 @@
     }
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button name="submit" type="submit" class="btn btn-default">@sr["Submit"]</button>
+@if (Model.RecaptchaPublicKey.Length > 0 && Model.UseInvisibleCaptcha)
+{
+    <button class="btn btn-default g-recaptcha" data-sitekey="@Model.RecaptchaPublicKey" data-callback='onCaptchaSubmit'>@sr["Submit"]</button>
+}
+else
+{
+    <button name="submit" type="submit" class="btn btn-default">@sr["Submit"]</button>
+}
+            
         </div>
     </div>
 </form>

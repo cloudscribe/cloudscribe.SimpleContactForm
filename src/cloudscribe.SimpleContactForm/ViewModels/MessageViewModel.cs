@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2016-11-21
+// Last Modified:			2017-04-01
 // 
 
 using System.ComponentModel.DataAnnotations;
@@ -27,6 +27,7 @@ namespace cloudscribe.SimpleContactForm.ViewModels
         public string Message { get; set; }
 
         public string RecaptchaPublicKey { get; set; } = string.Empty;
+        public bool UseInvisibleCaptcha { get; set; } = false;
 
         public string CustomField1 { get; set; }
         public string CustomField2 { get; set; }

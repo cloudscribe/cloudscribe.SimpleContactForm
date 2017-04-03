@@ -54,6 +54,7 @@ namespace cloudscribe.SimpleContactForm.Controllers
             {
                 var captchaKeys = await formService.GetRecaptchaKeys();
                 model.RecaptchaPublicKey = captchaKeys.PublicKey;
+                model.UseInvisibleCaptcha = captchaKeys.Invisible;
             }
             
 
@@ -69,6 +70,7 @@ namespace cloudscribe.SimpleContactForm.Controllers
             if (!HttpContext.User.Identity.IsAuthenticated)
             {
                 model.RecaptchaPublicKey = captchaKeys.PublicKey;
+                model.UseInvisibleCaptcha = captchaKeys.Invisible;
             }
             
             if (!ModelState.IsValid)

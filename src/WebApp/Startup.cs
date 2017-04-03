@@ -27,7 +27,7 @@ namespace WebApp
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile("appsettings.dev.json", optional: true)
+                .AddJsonFile("appsettings.dev.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
@@ -118,9 +118,9 @@ namespace WebApp
                     options.AddCloudscribeViewLocationFormats();
 
                     options.AddEmbeddedViewsForNavigation();
-                    options.AddEmbeddedViewsForCloudscribeCore();
+                    options.AddEmbeddedBootstrap3ViewsForCloudscribeCore();
                     options.AddEmbeddedViewsForCloudscribeLogging();
-                    ;
+                    options.AddEmbeddedViewsForCloudscribeSimpleContactForm();
 
                     options.ViewLocationExpanders.Add(new cloudscribe.Core.Web.Components.SiteViewLocationExpander());
                 })
