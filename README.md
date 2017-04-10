@@ -1,5 +1,5 @@
 # cloudscribe.SimpleContactForm
-a simple yet flexible contact form for ASP.NET Core
+a simple yet flexible contact form for ASP.NET Core. Get the big picture on cloudscribe projects at [cloudscribe.com](https://www.cloudscribe.com)
 
 It uses recaptcha unless you are authenticated.
 
