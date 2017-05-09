@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2017-04-01
+// Last Modified:			2017-04-25
 // 
 
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +18,7 @@ namespace cloudscribe.SimpleContactForm.ViewModels
         public string Name { get; set; }
 
         [Required(ErrorMessage = "The Email field is required.")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage ="The Email field is not a valid email address.")]
         public string Email { get; set; }
 
         public string Subject { get; set; }
