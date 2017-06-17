@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>A simple contact form for ASP.NET Core</Description>
-    <VersionPrefix>1.1.1</VersionPrefix>
+    <VersionPrefix>1.1.2</VersionPrefix>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>net451;net452;net46;netstandard1.6</TargetFrameworks>
     <AssemblyName>cloudscribe.SimpleContactForm</AssemblyName>

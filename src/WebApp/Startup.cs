@@ -36,6 +36,7 @@ namespace WebApp
 
         public IHostingEnvironment environment { get; set; }
         public IConfigurationRoot Configuration { get; }
+        public bool SslIsAvailable = false;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -103,12 +104,13 @@ namespace WebApp
                 //}));
             });
 
+            SslIsAvailable = Configuration.GetValue<bool>("AppSettings:UseSsl");
             services.Configure<MvcOptions>(options =>
             {
-                //  if(environment.IsProduction())
-                //  {
-                options.Filters.Add(new RequireHttpsAttribute());
-                //   }
+                if (SslIsAvailable)
+                {
+                    options.Filters.Add(new RequireHttpsAttribute());
+                }
 
             });
 
@@ -117,10 +119,12 @@ namespace WebApp
                 {
                     options.AddCloudscribeViewLocationFormats();
 
-                    options.AddEmbeddedViewsForNavigation();
-                    options.AddEmbeddedBootstrap3ViewsForCloudscribeCore();
-                    options.AddEmbeddedViewsForCloudscribeLogging();
-                    options.AddEmbeddedViewsForCloudscribeSimpleContactForm();
+                    options.AddCloudscribeCommonEmbeddedViews();
+                    options.AddCloudscribeNavigationBootstrap3Views();
+                    options.AddCloudscribeCoreBootstrap3Views();
+                    options.AddCloudscribeFileManagerBootstrap3Views();
+                    options.AddCloudscribeLoggingBootstrap3Views();
+                    options.AddCloudscribeSimpleContactFormViews();
 
                     options.ViewLocationExpanders.Add(new cloudscribe.Core.Web.Components.SiteViewLocationExpander());
                 })
@@ -151,30 +155,22 @@ namespace WebApp
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/oops/error");
             }
 
             app.UseForwardedHeaders();
             app.UseStaticFiles();
-
-            // custom 404 and error page - this preserves the status code (ie 404)
-            app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
-
-            app.UseSession();
+            
+            //app.UseSession();
 
             app.UseRequestLocalization(localizationOptionsAccessor.Value);
-
-            app.UseMultitenancy<cloudscribe.Core.Models.SiteContext>();
-
+            
             var multiTenantOptions = multiTenantOptionsAccessor.Value;
 
-            app.UsePerTenant<cloudscribe.Core.Models.SiteContext>((ctx, builder) =>
-            {
-                builder.UseCloudscribeCoreDefaultAuthentication(
+            app.UseCloudscribeCore(
                     loggerFactory,
                     multiTenantOptions,
-                    ctx.Tenant);
-            });
+                    SslIsAvailable);
 
             UseMvc(app, multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName);
 
@@ -186,8 +182,17 @@ namespace WebApp
         {
             app.UseMvc(routes =>
             {
+                routes.AddCloudscribeFileManagerRoutes();
+
                 if (useFolders)
                 {
+                    routes.MapRoute(
+                       name: "foldererrorhandler",
+                       template: "{sitefolder}/oops/error/{statusCode?}",
+                       defaults: new { controller = "Oops", action = "Error" },
+                       constraints: new { name = new cloudscribe.Core.Web.Components.SiteFolderRouteConstraint() }
+                    );
+
                     routes.MapRoute(
                         name: "folderdefault",
                         template: "{sitefolder}/{controller}/{action}/{id?}",
@@ -198,9 +203,10 @@ namespace WebApp
                 }
 
                 routes.MapRoute(
-                    name: "errorhandler",
-                    template: "{controller}/{action}/{statusCode}"
-                    );
+                   name: "errorhandler",
+                   template: "oops/error/{statusCode?}",
+                   defaults: new { controller = "Oops", action = "Error" }
+                   );
 
                 routes.MapRoute(
                     name: "default",
@@ -220,7 +226,21 @@ namespace WebApp
             {
                 options.AddCloudscribeCoreDefaultPolicies();
                 options.AddCloudscribeLoggingDefaultPolicy();
-                
+
+                options.AddPolicy(
+                    "FileManagerPolicy",
+                    authBuilder =>
+                    {
+                        authBuilder.RequireRole("Administrators", "Content Administrators");
+                    });
+
+                options.AddPolicy(
+                    "FileManagerDeletePolicy",
+                    authBuilder =>
+                    {
+                        authBuilder.RequireRole("Administrators", "Content Administrators");
+                    });
+
                 // add other policies here 
 
             });

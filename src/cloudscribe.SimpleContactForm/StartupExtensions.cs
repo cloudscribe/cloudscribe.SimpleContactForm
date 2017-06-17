@@ -57,7 +57,18 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
+        [Obsolete("AddEmbeddedViewsForCloudscribeSimpleContactForm is deprecated, please use AddCloudscribeSimpleContactFormViews instead.")]
         public static RazorViewEngineOptions AddEmbeddedViewsForCloudscribeSimpleContactForm(this RazorViewEngineOptions options)
+        {
+            options.FileProviders.Add(new EmbeddedFileProvider(
+                    typeof(ContactFormService).GetTypeInfo().Assembly,
+                    "cloudscribe.SimpleContactForm"
+                ));
+
+            return options;
+        }
+
+        public static RazorViewEngineOptions AddCloudscribeSimpleContactFormViews(this RazorViewEngineOptions options)
         {
             options.FileProviders.Add(new EmbeddedFileProvider(
                     typeof(ContactFormService).GetTypeInfo().Assembly,
