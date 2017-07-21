@@ -1,6 +1,12 @@
 # cloudscribe.SimpleContactForm
 a simple yet flexible contact form for ASP.NET Core. Get the big picture on cloudscribe projects at [cloudscribe.com](https://www.cloudscribe.com)
 
+### Build Status
+
+| Windows  | Linux/Mac |
+| ------------- | ------------- |
+| [![Build status](https://ci.appveyor.com/api/projects/status/b0erueoiou4oghev?svg=true)](https://ci.appveyor.com/project/joeaudette/cloudscribe-simplecontactform)  | [![Build Status](https://travis-ci.org/joeaudette/cloudscribe.SimpleContactForm.svg?branch=master)](https://travis-ci.org/joeaudette/cloudscribe.SimpleContactForm)  |
+
 It uses recaptcha unless you are authenticated.
 
 Additional content and styling can be customized in /Views/Contact/index.cshtml
