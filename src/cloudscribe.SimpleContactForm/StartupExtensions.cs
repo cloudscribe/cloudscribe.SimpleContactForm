@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. 
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2016-11-19
+// Last Modified:			2017-08-16
 // 
 
 using cloudscribe.SimpleContactForm.Components;
@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddCloudscribeSimpleContactForm(
             this IServiceCollection services,
-            IConfigurationRoot configuration,
+            IConfiguration configuration,
             bool includeSmtpMessageProcessor = true)
         {
 

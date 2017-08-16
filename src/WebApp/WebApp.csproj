@@ -2,10 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>WebApp</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <PackageId>WebApp</PackageId>
+    <UserSecretsId>aspnet-WebApp20170814_2-A211B1CC-717F-4108-BF54-E3416F2370F1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,37 +16,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="cloudscribe.Core.Web.Mvc" Version="2.0.0-*" />
-    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="2.0.0-*" />
-    <PackageReference Include="cloudscribe.Logging.Web" Version="2.0.0-*" />
-    <PackageReference Include="cloudscribe.Logging.NoDb" Version="2.0.0-*" />
-    
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Abstractions" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.0-*" />
+    <PackageReference Include="cloudscribe.Core.Web.Mvc" Version="2.0.*" />
+    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="2.0.*" />
+    <PackageReference Include="cloudscribe.Logging.Web" Version="2.0.*" />
+    <PackageReference Include="cloudscribe.Logging.NoDb" Version="2.0.*" />
+
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.*" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.*" PrivateAssets="All" />
 
   </ItemGroup>
 
  
 
   <ItemGroup>
-    <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.*" />
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0-*" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.*" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.*" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.*" />
   </ItemGroup>
 
 </Project>
