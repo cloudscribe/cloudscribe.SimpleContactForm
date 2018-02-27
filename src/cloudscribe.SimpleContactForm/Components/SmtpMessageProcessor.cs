@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. 
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2016-11-21
+// Last Modified:			2018-02-27
 // 
 
 using cloudscribe.Messaging.Email;
@@ -98,7 +98,7 @@ namespace cloudscribe.SimpleContactForm.Components
                     }
                     catch (Exception ex)
                     {
-                        log.LogError("error sending contact form submitter notification email", ex);
+                        log.LogError($"error sending contact form submitter notification email {ex.Message} : {ex.StackTrace}");
                         var m = new MessageError();
                         m.Code = "SubmitterNotificationError";
                         m.Description = ex.Message;
@@ -109,7 +109,7 @@ namespace cloudscribe.SimpleContactForm.Components
             }
             catch (Exception ex)
             {
-                log.LogError("error sending contact form notification email: " + ex.Message, ex);
+                log.LogError($"error sending contact form notification email: {ex.Message} : {ex.StackTrace}");
                 var m = new MessageError();
                 m.Code = "NotificationError";
                 m.Description = ex.Message;

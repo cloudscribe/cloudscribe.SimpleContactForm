@@ -255,3 +255,4 @@ paket-files/
 **/nodb_storage/**
 **/wwwroot/lib*
 **/appsettings.dev.json
+src/WebApp/appsettings.Development.json
