@@ -56,7 +56,7 @@ namespace WebApp
             services.AddCloudscribeCoreNoDbStorage();
             services.AddCloudscribeLoggingNoDbStorage(Configuration);
             services.AddCloudscribeLogging();
-            services.AddCloudscribeCore(Configuration);
+            services.AddCloudscribeCoreMvc(Configuration);
 
             
             services.AddCloudscribeSimpleContactForm(Configuration);
