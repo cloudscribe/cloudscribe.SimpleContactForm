@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Integration library for usingcloudscribe SimpleContactForm with cloudscribe.Core</Description>
+    <VersionPrefix>2.0.2</VersionPrefix>
+    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <Authors>Joe Audette</Authors>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageTags>cloudscribe;contact form</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Entropy</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cloudscribe.SimpleContactForm\cloudscribe.SimpleContactForm.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="cloudscribe.Core.Models" Version="2.0.*" />
+  </ItemGroup>
+
+</Project>

@@ -6,16 +6,14 @@
 // 
 
 using cloudscribe.SimpleContactForm.Components;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Authorization;
+using cloudscribe.SimpleContactForm.Models;
 using cloudscribe.SimpleContactForm.ViewModels;
 using cloudscribe.Web.Common.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace cloudscribe.SimpleContactForm.Controllers
 {
@@ -23,38 +21,45 @@ namespace cloudscribe.SimpleContactForm.Controllers
     {
         public ContactController(
             ContactFormService formService,
+            IPrePopulateContactForm formPopulator,
             IStringLocalizer<SimpleContactFormStringResources> localizer,
             ILogger<ContactController> logger
             )
         {
-            sr = localizer;
-            log = logger;
-            this.formService = formService;
+            _sr = localizer;
+            _log = logger;
+            _formPopulator = formPopulator;
+            _formService = formService;
         }
 
-        private ContactFormService formService;
-        private IStringLocalizer sr;
-        private ILogger log;
+        private ContactFormService _formService;
+        private IPrePopulateContactForm _formPopulator;
+        private IStringLocalizer _sr;
+        private ILogger _log;
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            ViewData["Title"] = sr["Contact"];
+            ViewData["Title"] = _sr["Contact"];
             
-            var isConfigured = await formService.IsConfigured();
+            var isConfigured = await _formService.IsConfigured();
             if(!isConfigured)
             {
                 return View("NotConfigured");
             }
             var model = new MessageViewModel();
-            var form = await formService.GetFormSettings();
+            var form = await _formService.GetFormSettings();
             model.FormId = form.Id;
             if(!HttpContext.User.Identity.IsAuthenticated)
             {
-                var captchaKeys = await formService.GetRecaptchaKeys();
+                var captchaKeys = await _formService.GetRecaptchaKeys();
                 model.RecaptchaPublicKey = captchaKeys.PublicKey;
                 model.UseInvisibleCaptcha = captchaKeys.Invisible;
+            }
+            else
+            {
+                await _formPopulator.Prepopulate(model, User);
             }
             
 
@@ -65,8 +70,8 @@ namespace cloudscribe.SimpleContactForm.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index(MessageViewModel model)
         {
-            ViewData["Title"] = sr["Contact"];
-            var captchaKeys = await formService.GetRecaptchaKeys();
+            ViewData["Title"] = _sr["Contact"];
+            var captchaKeys = await _formService.GetRecaptchaKeys();
             if (!HttpContext.User.Identity.IsAuthenticated)
             {
                 model.RecaptchaPublicKey = captchaKeys.PublicKey;
@@ -84,13 +89,13 @@ namespace cloudscribe.SimpleContactForm.Controllers
 
                 if (!captchaResponse.Success)
                 {
-                    ModelState.AddModelError("recaptchaerror", sr["reCAPTCHA Error occured. Please try again"]);
+                    ModelState.AddModelError("recaptchaerror", _sr["reCAPTCHA Error occured. Please try again"]);
                     return View(model);
                 }
             }
 
             var ipAddress = HttpContext.GetIpV4Address(); 
-            var result = await formService.ProcessMessage(model, ipAddress);
+            var result = await _formService.ProcessMessage(model, ipAddress);
             if(result.Succeeded)
             {
                 return View("Success");

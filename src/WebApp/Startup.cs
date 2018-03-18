@@ -13,7 +13,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
-using cloudscribe.Messaging.Email;
+using cloudscribe.Email;
 using cloudscribe.Web.Common.Models;
 using cloudscribe.Web.Common.Components;
 
@@ -58,7 +58,7 @@ namespace WebApp
             services.AddCloudscribeLogging();
             services.AddCloudscribeCoreMvc(Configuration);
 
-            
+            services.AddCloudscribeSimpleContactFormCoreIntegration(Configuration);
             services.AddCloudscribeSimpleContactForm(Configuration);
 
             services.AddLocalization(options => options.ResourcesPath = "GlobalResources");

@@ -2,17 +2,15 @@
 // Licensed under the Apache License, Version 2.0. 
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2016-11-19
+// Last Modified:			2018-03-18
 // 
 
-using cloudscribe.Messaging.Email;
 using cloudscribe.SimpleContactForm.Models;
 using cloudscribe.SimpleContactForm.ViewModels;
 using cloudscribe.Web.Common.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace cloudscribe.SimpleContactForm.Components
@@ -20,35 +18,32 @@ namespace cloudscribe.SimpleContactForm.Components
     public class ContactFormService
     {
         public ContactFormService(
-            IEnumerable<IProcessMessages> messageProcessors,
+            IEnumerable<IProcessContactForm> messageProcessors,
             IContactFormResolver contactFormResolver,
-            ISmtpOptionsProvider smtpOptionsProvider,
             IRecaptchaKeysProvider recaptchaKeysProvider,
             ILogger<ContactFormService> logger
             )
         {
-            this.contactFormResolver = contactFormResolver;
-            recaptchaKeys = recaptchaKeysProvider;
-            this.messageProcessors = messageProcessors;
-            this.smtpOptionsProvider = smtpOptionsProvider;
-            log = logger;
+            _contactFormResolver = contactFormResolver;
+            _recaptchaKeys = recaptchaKeysProvider;
+            _messageProcessors = messageProcessors;
+            _log = logger;
         }
 
-        private IContactFormResolver contactFormResolver;
-        private IRecaptchaKeysProvider recaptchaKeys;
-        private ContactFormSettings form = null;
-        private ISmtpOptionsProvider smtpOptionsProvider;
-        private IEnumerable<IProcessMessages> messageProcessors;
-        private ILogger log;
+        private IContactFormResolver _contactFormResolver;
+        private IRecaptchaKeysProvider _recaptchaKeys;
+        private ContactFormSettings _form = null;
+        private IEnumerable<IProcessContactForm> _messageProcessors;
+        private ILogger _log;
 
         public async Task<ContactFormSettings> GetFormSettings()
         {
-            if(form == null)
+            if(_form == null)
             {
-                form = await contactFormResolver.GetCurrentContactForm().ConfigureAwait(false);
+                _form = await _contactFormResolver.GetCurrentContactForm().ConfigureAwait(false);
             }
 
-            return form;
+            return _form;
         }
 
         public async Task<bool> IsConfigured()
@@ -56,15 +51,15 @@ namespace cloudscribe.SimpleContactForm.Components
             var form = await GetFormSettings().ConfigureAwait(false);
             if(string.IsNullOrEmpty(form.NotificationEmailCsv)) { return false; }
 
-            var smtpSettings = await smtpOptionsProvider.GetSmtpOptions().ConfigureAwait(false);
-            if (string.IsNullOrEmpty(smtpSettings.Server)) { return false; }
+            //var smtpSettings = await smtpOptionsProvider.GetSmtpOptions().ConfigureAwait(false);
+            //if (string.IsNullOrEmpty(smtpSettings.Server)) { return false; }
 
             return true;
         }
 
         public async Task<RecaptchaKeys> GetRecaptchaKeys()
         {
-            return await recaptchaKeys.GetKeys().ConfigureAwait(false);
+            return await _recaptchaKeys.GetKeys().ConfigureAwait(false);
         }
 
         public async Task<MessageResult> ProcessMessage(MessageViewModel model, string ipAddress)
@@ -79,7 +74,7 @@ namespace cloudscribe.SimpleContactForm.Components
             int successCount = 0;
             int failureCount = 0;
             var errorList = new List<MessageError>();
-            foreach(var processor in messageProcessors)
+            foreach(var processor in _messageProcessors)
             {
                 try
                 {
@@ -98,10 +93,12 @@ namespace cloudscribe.SimpleContactForm.Components
                 catch(Exception ex)
                 {
                     failureCount += 1;
-                    log.LogError("error processing contact form message", ex);
-                    var me = new MessageError();
-                    me.Code = "processfailure";
-                    me.Description = ex.Message;
+                    _log.LogError("error processing contact form message", ex);
+                    var me = new MessageError
+                    {
+                        Code = "processfailure",
+                        Description = ex.Message
+                    };
                     errorList.Add(me);
                 }
             }

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "src\WebApp\WebApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.SimpleContactForm", "src\cloudscribe.SimpleContactForm\cloudscribe.SimpleContactForm.csproj", "{AC4CE212-E68F-4C59-B616-B5210AEDBC51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.SimpleContactForm.CoreIntegration", "src\cloudscribe.SimpleContactForm.CoreIntegration\cloudscribe.SimpleContactForm.CoreIntegration.csproj", "{8679B787-64CE-459B-A9CD-566AF85FAA5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{AC4CE212-E68F-4C59-B616-B5210AEDBC51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC4CE212-E68F-4C59-B616-B5210AEDBC51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC4CE212-E68F-4C59-B616-B5210AEDBC51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8679B787-64CE-459B-A9CD-566AF85FAA5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8679B787-64CE-459B-A9CD-566AF85FAA5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8679B787-64CE-459B-A9CD-566AF85FAA5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8679B787-64CE-459B-A9CD-566AF85FAA5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,5 +38,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C83D4D4D-DC99-478F-B3B6-72D954C3EF15} = {6CB13D3A-F601-400B-9053-C78554CE7062}
 		{AC4CE212-E68F-4C59-B616-B5210AEDBC51} = {6CB13D3A-F601-400B-9053-C78554CE7062}
+		{8679B787-64CE-459B-A9CD-566AF85FAA5F} = {6CB13D3A-F601-400B-9053-C78554CE7062}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C78D16A-C33F-4D49-9FED-46239E104167}
 	EndGlobalSection
 EndGlobal

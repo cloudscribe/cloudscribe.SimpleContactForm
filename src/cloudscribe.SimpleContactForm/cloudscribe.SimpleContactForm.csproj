@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <Description>A simple contact form for ASP.NET Core</Description>
-    <VersionPrefix>2.0.1</VersionPrefix>
-    <AssemblyVersion>2.0.1</AssemblyVersion>
+    <VersionPrefix>2.0.2</VersionPrefix>
+    <AssemblyVersion>2.0.2</AssemblyVersion>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>cloudscribe.SimpleContactForm</AssemblyName>
@@ -32,7 +32,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.0.*" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.*" />
     <PackageReference Include="cloudscribe.Web.Common" Version="2.0.*" />
-    <PackageReference Include="cloudscribe.Messaging.Email" Version="2.0.*" />
+    <PackageReference Include="cloudscribe.Email.Senders" Version="1.0.*" />
   </ItemGroup>
 
   

@@ -15,7 +15,7 @@ namespace cloudscribe.SimpleContactForm.Components
 
         private ContactFormSettings form;
 
-        public Task<ContactFormSettings> GetCurrentContactForm()
+        public virtual Task<ContactFormSettings> GetCurrentContactForm()
         {
             return Task.FromResult(form);
         }

@@ -12,6 +12,7 @@ namespace cloudscribe.SimpleContactForm.Models
 {
     public class ContactFormMessage
     {
+        public object Tenant { get; set; } = null;
         public string FormId { get; set; }
 
         public string Name { get; set; }

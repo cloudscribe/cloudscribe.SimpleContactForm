@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. 
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2017-08-16
+// Last Modified:			2018-03-16
 // 
 
 using cloudscribe.SimpleContactForm.Components;
@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.FileProviders;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
-using cloudscribe.Messaging.Email;
+using cloudscribe.Email;
 using cloudscribe.Web.Common.Models;
 using Microsoft.Extensions.DependencyInjection;
 using cloudscribe.Web.Common.Components;
@@ -28,28 +28,30 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddCloudscribeSimpleContactForm(
             this IServiceCollection services,
             IConfiguration configuration,
-            bool includeSmtpMessageProcessor = true)
+            bool includeDefaultMessageProcessor = true)
         {
 
-            services.Configure<SmtpOptions>(configuration.GetSection("SmtpOptions"));
+            services.AddCloudscribeEmailSenders(configuration);
             services.Configure<RecaptchaKeys>(configuration.GetSection("RecaptchaKeys"));
-            services.Configure<SmtpMessageProcessorOptions>(configuration.GetSection("SmtpMessageProcessorOptions"));
+            services.Configure<ContactFormMessageOptions>(configuration.GetSection("ContactFormMessageOptions"));
             services.Configure<ContactFormSettings>(configuration.GetSection("ContactFormSettings"));
 
 
-            services.TryAddScoped<ISmtpOptionsProvider, ConfigSmtpOptionsProvider>();
+           
             services.TryAddScoped<IRecaptchaKeysProvider, ConfigRecaptchaKeysProvider>();
             services.AddScoped<ContactFormService, ContactFormService>();
             
             services.TryAddScoped<IContactFormResolver, ConfigContactFormResolver>();
+            services.TryAddScoped<ITenantResolver, NullTenantResolver>();
+            services.TryAddScoped<IPrePopulateContactForm, NotImplementedContactFromPopulator>();
             // pass in false if you want to implement custom logic for notification
             // instead of the built in logic
             // there can be multiple registered IProcessMessages implementations and all of them will be invoked
             // for example could implement one to persist the messages in data storage
             // could be one to integrate with salesforce.com or some other crm
-            if (includeSmtpMessageProcessor)
+            if (includeDefaultMessageProcessor)
             {
-                services.AddScoped<IProcessMessages, SmtpMessageProcessor>();
+                services.AddScoped<IProcessContactForm, ContactFormProcessor>();
             }
             
 

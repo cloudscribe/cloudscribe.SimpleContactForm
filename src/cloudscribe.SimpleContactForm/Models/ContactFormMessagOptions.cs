@@ -1,6 +1,6 @@
 ﻿namespace cloudscribe.SimpleContactForm.Models
 {
-    public class SmtpMessageProcessorOptions
+    public class ContactFormMessageOptions
     {
         public string NotificationTextViewName { get; set; } = "EmailTemplates/ContactFormTextEmail";
         public string NotificationHtmlViewName { get; set; } = "EmailTemplates/ContactFormHtmlEmail";
