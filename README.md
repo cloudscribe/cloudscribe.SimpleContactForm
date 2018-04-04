@@ -5,7 +5,7 @@ a simple yet flexible contact form for ASP.NET Core. Get the big picture on clou
 
 | Windows  | Linux/Mac |
 | ------------- | ------------- |
-| [![Build status](https://ci.appveyor.com/api/projects/status/b0erueoiou4oghev/branch/master?svg=true)](https://ci.appveyor.com/project/joeaudette/cloudscribe-simplecontactform/branch/master)  | [![Build Status](https://travis-ci.org/joeaudette/cloudscribe.SimpleContactForm.svg?branch=master)](https://travis-ci.org/joeaudette/cloudscribe.SimpleContactForm)  |
+| [![Build status](https://ci.appveyor.com/api/projects/status/b0erueoiou4oghev/branch/master?svg=true)](https://ci.appveyor.com/project/joeaudette/cloudscribe-simplecontactform/branch/master)  | [![Build Status](https://travis-ci.org/cloudscribe/cloudscribe.SimpleContactForm.svg?branch=master)](https://travis-ci.org/cloudscribe/cloudscribe.SimpleContactForm)  |
 
 It uses recaptcha unless you are authenticated.
 
