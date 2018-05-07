@@ -2,13 +2,14 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2016-11-19
+// Last Modified:			2018-05-07
 // 
 
 using cloudscribe.SimpleContactForm.Components;
 using cloudscribe.SimpleContactForm.Models;
 using cloudscribe.SimpleContactForm.ViewModels;
 using cloudscribe.Web.Common.Extensions;
+using cloudscribe.Web.Common.Recaptcha;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -22,44 +23,47 @@ namespace cloudscribe.SimpleContactForm.Controllers
         public ContactController(
             ContactFormService formService,
             IPrePopulateContactForm formPopulator,
+            IRecaptchaServerSideValidator recaptchServerSideValidator,
             IStringLocalizer<SimpleContactFormStringResources> localizer,
             ILogger<ContactController> logger
             )
         {
-            _sr = localizer;
-            _log = logger;
-            _formPopulator = formPopulator;
-            _formService = formService;
+            StringLocalizer = localizer;
+            Log = logger;
+            FormPopulator = formPopulator;
+            FormService = formService;
+            RecaptchServerSideValidator = recaptchServerSideValidator;
         }
 
-        private ContactFormService _formService;
-        private IPrePopulateContactForm _formPopulator;
-        private IStringLocalizer _sr;
-        private ILogger _log;
+        protected ContactFormService FormService { get; private set; }
+        protected IPrePopulateContactForm FormPopulator { get; private set; }
+        protected IRecaptchaServerSideValidator RecaptchServerSideValidator { get; private set; }
+        protected IStringLocalizer StringLocalizer { get; private set; }
+        protected ILogger Log { get; private set; }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public virtual async Task<IActionResult> Index()
         {
-            ViewData["Title"] = _sr["Contact"];
+            ViewData["Title"] = StringLocalizer["Contact"];
             
-            var isConfigured = await _formService.IsConfigured();
+            var isConfigured = await FormService.IsConfigured();
             if(!isConfigured)
             {
                 return View("NotConfigured");
             }
             var model = new MessageViewModel();
-            var form = await _formService.GetFormSettings();
+            var form = await FormService.GetFormSettings();
             model.FormId = form.Id;
             if(!HttpContext.User.Identity.IsAuthenticated)
             {
-                var captchaKeys = await _formService.GetRecaptchaKeys();
+                var captchaKeys = await FormService.GetRecaptchaKeys();
                 model.RecaptchaPublicKey = captchaKeys.PublicKey;
                 model.UseInvisibleCaptcha = captchaKeys.Invisible;
             }
             else
             {
-                await _formPopulator.Prepopulate(model, User);
+                await FormPopulator.Prepopulate(model, User);
             }
             
 
@@ -68,10 +72,10 @@ namespace cloudscribe.SimpleContactForm.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Index(MessageViewModel model)
+        public virtual async Task<IActionResult> Index(MessageViewModel model)
         {
-            ViewData["Title"] = _sr["Contact"];
-            var captchaKeys = await _formService.GetRecaptchaKeys();
+            ViewData["Title"] = StringLocalizer["Contact"];
+            var captchaKeys = await FormService.GetRecaptchaKeys();
             if (!HttpContext.User.Identity.IsAuthenticated)
             {
                 model.RecaptchaPublicKey = captchaKeys.PublicKey;
@@ -85,17 +89,16 @@ namespace cloudscribe.SimpleContactForm.Controllers
             
             if((!HttpContext.User.Identity.IsAuthenticated) && (!string.IsNullOrEmpty(captchaKeys.PrivateKey)))
             {
-                var captchaResponse = await this.ValidateRecaptcha(Request, captchaKeys.PrivateKey);
-
+                var captchaResponse = await RecaptchServerSideValidator.ValidateRecaptcha(Request, captchaKeys.PrivateKey);
                 if (!captchaResponse.Success)
                 {
-                    ModelState.AddModelError("recaptchaerror", _sr["reCAPTCHA Error occured. Please try again"]);
+                    ModelState.AddModelError("recaptchaerror", StringLocalizer["reCAPTCHA Error occured. Please try again"]);
                     return View(model);
                 }
             }
 
             var ipAddress = HttpContext.GetIpV4Address(); 
-            var result = await _formService.ProcessMessage(model, ipAddress);
+            var result = await FormService.ProcessMessage(model, ipAddress);
             if(result.Succeeded)
             {
                 return View("Success");

@@ -134,8 +134,7 @@ namespace WebApp
             ILoggerFactory loggerFactory,
             IOptions<cloudscribe.Core.Models.MultiTenantOptions> multiTenantOptionsAccessor,
             IServiceProvider serviceProvider,
-            IOptions<RequestLocalizationOptions> localizationOptionsAccessor,
-            cloudscribe.Logging.Web.ILogRepository logRepo
+            IOptions<RequestLocalizationOptions> localizationOptionsAccessor
             )
         {
            
