@@ -111,14 +111,14 @@ namespace WebApp
             services.AddMvc()
                 .AddRazorOptions(options =>
                 {
-                    options.AddCloudscribeViewLocationFormats();
+                    //options.AddCloudscribeViewLocationFormats();
 
-                    options.AddCloudscribeCommonEmbeddedViews();
-                    options.AddCloudscribeNavigationBootstrap3Views();
-                    options.AddCloudscribeCoreBootstrap3Views();
-                    options.AddCloudscribeFileManagerBootstrap3Views();
-                    options.AddCloudscribeLoggingBootstrap3Views();
-                    options.AddCloudscribeSimpleContactFormViews();
+                    //options.AddCloudscribeCommonEmbeddedViews();
+                    //options.AddCloudscribeNavigationBootstrap3Views();
+                    //options.AddCloudscribeCoreBootstrap3Views();
+                   // options.AddCloudscribeFileManagerBootstrap3Views();
+                    //options.AddCloudscribeLoggingBootstrap3Views();
+                    //options.AddCloudscribeSimpleContactFormViews();
 
                     options.ViewLocationExpanders.Add(new cloudscribe.Core.Web.Components.SiteViewLocationExpander());
                 })
