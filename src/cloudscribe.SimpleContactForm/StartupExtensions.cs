@@ -2,24 +2,15 @@
 // Licensed under the Apache License, Version 2.0. 
 // Author:					Joe Audette
 // Created:					2016-11-19
-// Last Modified:			2018-03-16
+// Last Modified:			2018-06-09
 // 
 
 using cloudscribe.SimpleContactForm.Components;
 using cloudscribe.SimpleContactForm.Models;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.FileProviders;
-using System.Reflection;
-using Microsoft.Extensions.Configuration;
-using cloudscribe.Email;
-using cloudscribe.Web.Common.Models;
-using Microsoft.Extensions.DependencyInjection;
 using cloudscribe.Web.Common.Components;
+using cloudscribe.Web.Common.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -59,25 +50,25 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        [Obsolete("AddEmbeddedViewsForCloudscribeSimpleContactForm is deprecated, please use AddCloudscribeSimpleContactFormViews instead.")]
-        public static RazorViewEngineOptions AddEmbeddedViewsForCloudscribeSimpleContactForm(this RazorViewEngineOptions options)
-        {
-            options.FileProviders.Add(new EmbeddedFileProvider(
-                    typeof(ContactFormService).GetTypeInfo().Assembly,
-                    "cloudscribe.SimpleContactForm"
-                ));
+        //[Obsolete("AddEmbeddedViewsForCloudscribeSimpleContactForm is deprecated, please use AddCloudscribeSimpleContactFormViews instead.")]
+        //public static RazorViewEngineOptions AddEmbeddedViewsForCloudscribeSimpleContactForm(this RazorViewEngineOptions options)
+        //{
+        //    options.FileProviders.Add(new EmbeddedFileProvider(
+        //            typeof(ContactFormService).GetTypeInfo().Assembly,
+        //            "cloudscribe.SimpleContactForm"
+        //        ));
 
-            return options;
-        }
+        //    return options;
+        //}
 
-        public static RazorViewEngineOptions AddCloudscribeSimpleContactFormViews(this RazorViewEngineOptions options)
-        {
-            options.FileProviders.Add(new EmbeddedFileProvider(
-                    typeof(ContactFormService).GetTypeInfo().Assembly,
-                    "cloudscribe.SimpleContactForm"
-                ));
+        //public static RazorViewEngineOptions AddCloudscribeSimpleContactFormViews(this RazorViewEngineOptions options)
+        //{
+        //    options.FileProviders.Add(new EmbeddedFileProvider(
+        //            typeof(ContactFormService).GetTypeInfo().Assembly,
+        //            "cloudscribe.SimpleContactForm"
+        //        ));
 
-            return options;
-        }
+        //    return options;
+        //}
     }
 }
