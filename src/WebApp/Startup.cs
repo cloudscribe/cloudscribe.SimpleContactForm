@@ -58,6 +58,9 @@ namespace WebApp
             services.AddCloudscribeLogging();
             services.AddCloudscribeCoreMvc(Configuration);
 
+            // if not using cloudscribe core then you would need this line:
+            //services.AddCloudscribeEmailSenders(configuration);
+
             services.AddCloudscribeSimpleContactFormCoreIntegration(Configuration);
             services.AddCloudscribeSimpleContactForm(Configuration);
 
