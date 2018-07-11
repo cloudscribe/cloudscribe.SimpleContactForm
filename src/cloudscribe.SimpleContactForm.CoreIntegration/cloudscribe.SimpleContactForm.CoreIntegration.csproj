@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <Description>Integration library for usingcloudscribe SimpleContactForm with cloudscribe.Core</Description>
-    <VersionPrefix>3.0.0</VersionPrefix>
-    <AssemblyVersion>3.0.0</AssemblyVersion>
+    <VersionPrefix>3.0.1</VersionPrefix>
+    <AssemblyVersion>3.0.1</AssemblyVersion>
     <Authors>Joe Audette</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageTags>cloudscribe;contact form</PackageTags>

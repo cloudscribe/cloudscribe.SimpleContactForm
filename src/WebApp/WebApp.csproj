@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-WebApp20170814_2-A211B1CC-717F-4108-BF54-E3416F2370F1</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;0436</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;0436</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Update="wwwroot\**\*;navigation.xml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -20,15 +27,15 @@
     <PackageReference Include="cloudscribe.Core.Web" Version="3.0.*" />
     <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap3" Version="3.0.*" />
     <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="3.0.*" />
-    <PackageReference Include="cloudscribe.Logging.Web" Version="3.0.*" />
-    <PackageReference Include="cloudscribe.Logging.NoDb" Version="2.1.*" />
+    <PackageReference Include="cloudscribe.Logging.Web" Version="3.0.7" />
+    <PackageReference Include="cloudscribe.Logging.NoDb" Version="3.0.2" />
 
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.*" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
     <!--
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.*" PrivateAssets="All" />
     -->
     
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.*"  />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
 
   </ItemGroup>
 

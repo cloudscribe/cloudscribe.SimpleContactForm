@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
             bool includeDefaultMessageProcessor = true)
         {
 
-            services.AddCloudscribeEmailSenders(configuration);
+            
             services.Configure<RecaptchaKeys>(configuration.GetSection("RecaptchaKeys"));
             services.Configure<ContactFormMessageOptions>(configuration.GetSection("ContactFormMessageOptions"));
             services.Configure<ContactFormSettings>(configuration.GetSection("ContactFormSettings"));
