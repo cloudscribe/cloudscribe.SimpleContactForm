@@ -24,28 +24,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="cloudscribe.Core.Web" Version="3.0.*" />
-    <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap3" Version="3.0.*" />
-    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="3.0.*" />
-    <PackageReference Include="cloudscribe.Logging.Web" Version="3.0.7" />
-    <PackageReference Include="cloudscribe.Logging.NoDb" Version="3.0.2" />
+    <PackageReference Include="cloudscribe.Core.Web" Version="3.1.28" />
+    <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap3" Version="3.1.12" />
+    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="3.0.9" />
+    <PackageReference Include="cloudscribe.Logging.Web" Version="3.0.9" />
+    <PackageReference Include="cloudscribe.Logging.NoDb" Version="3.0.4" />
 
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
-    <!--
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.*" PrivateAssets="All" />
-    -->
+    <PackageReference Include="Microsoft.AspNetCore.App" />
     
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
 
   </ItemGroup>
 
  
-<!--
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.*" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.*" />
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.*" />
-  </ItemGroup>
-  -->
+
 
 </Project>
