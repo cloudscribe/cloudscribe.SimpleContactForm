@@ -41,7 +41,8 @@ See appsettings.json in the WebApp for configuration, these are the settings:
       },
       "RecaptchaKeys": {
         "PublicKey": "",
-        "PrivateKey": ""
+        "PrivateKey": "",
+	"Invisible": false
       },
       "SmtpMessageProcessorOptions": {
         "NotificationTextViewName": "EmailTemplates/ContactFormTextEmail",
