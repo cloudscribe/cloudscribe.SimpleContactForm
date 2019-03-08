@@ -41,7 +41,8 @@ See appsettings.json in the WebApp for configuration, these are the settings:
       },
       "RecaptchaKeys": {
         "PublicKey": "",
-        "PrivateKey": ""
+        "PrivateKey": "",
+	    "Invisible": false
       },
       "SmtpMessageProcessorOptions": {
         "NotificationTextViewName": "EmailTemplates/ContactFormTextEmail",
@@ -50,3 +51,5 @@ See appsettings.json in the WebApp for configuration, these are the settings:
         "SubmitterNotificationHtmlViewName": "EmailTemplates/ContactFormSubmitterHtmlEmail"
       }
 	  
+
+Note that you should always get keys for Invisible Captcha, the Invisible Captcha keys work when configured both as visible anf invisible. Whereas keys not created for Invisible captcha won't work if you set invisible to true.
