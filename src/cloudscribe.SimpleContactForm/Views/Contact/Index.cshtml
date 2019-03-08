@@ -45,7 +45,7 @@
     <div class="form-group">
 @if (Model.RecaptchaPublicKey.Length > 0 && Model.UseInvisibleCaptcha)
 {
-    <button class="btn btn-default g-recaptcha" data-sitekey="@Model.RecaptchaPublicKey" data-callback='onCaptchaSubmit'>@sr["Submit"]</button>
+    <button class="btn btn-default btn-primary g-recaptcha" data-sitekey="@Model.RecaptchaPublicKey" data-callback='onCaptchaSubmit'>@sr["Submit"]</button>
 }
 else
 {
