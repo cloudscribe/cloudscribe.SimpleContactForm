@@ -232,6 +232,14 @@ namespace WebApp
                         authBuilder.RequireRole("Administrators", "Content Administrators");
                     });
 
+                options.AddPolicy(
+                    "FileUploadPolicy",
+                    authBuilder =>
+                    {
+                        authBuilder.RequireRole("Administrators", "Content Administrators");
+                    });
+
+
                 // add other policies here 
 
             });
