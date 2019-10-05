@@ -16,19 +16,20 @@ using Microsoft.Extensions.Options;
 using cloudscribe.Email;
 using cloudscribe.Web.Common.Models;
 using cloudscribe.Web.Common.Components;
+using Microsoft.Extensions.Hosting;
 
 namespace WebApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
            
             Configuration = configuration;
             Environment = env;
         }
 
-        public IHostingEnvironment Environment { get; set; }
+        public IWebHostEnvironment Environment { get; set; }
         public IConfiguration Configuration { get; }
         public bool SslIsAvailable = false;
 
@@ -111,6 +112,8 @@ namespace WebApp
 
             });
 
+            services.AddControllersWithViews();
+
             services.AddMvc()
                 .AddRazorOptions(options =>
                 {
@@ -133,7 +136,7 @@ namespace WebApp
         // ConfigureServices
         public void Configure(
             IApplicationBuilder app,
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             ILoggerFactory loggerFactory,
             IOptions<cloudscribe.Core.Models.MultiTenantOptions> multiTenantOptionsAccessor,
             IServiceProvider serviceProvider,
@@ -165,15 +168,59 @@ namespace WebApp
                     multiTenantOptions,
                     SslIsAvailable);
 
-            UseMvc(app, multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName);
+            //UseMvc(app, multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName);
+
+            var useFolders = multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName;
             
+            app.UseEndpoints(endpoints =>
+            {
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.AddCloudscribeFileManagerRoutes();
+
+                if (useFolders)
+                {
+                    endpoints.MapControllerRoute(
+                       name: "foldererrorhandler",
+                       pattern: "{sitefolder}/oops/error/{statusCode?}",
+                       defaults: new { controller = "Oops", action = "Error" },
+                       constraints: new { name = new cloudscribe.Core.Web.Components.SiteFolderRouteConstraint() }
+                    );
+
+                    endpoints.MapControllerRoute(
+                        name: "folderdefault",
+                        pattern: "{sitefolder}/{controller}/{action}/{id?}",
+                        defaults: new { controller = "Home", action = "Index" },
+                        constraints: new { name = new cloudscribe.Core.Web.Components.SiteFolderRouteConstraint() }
+                        );
+
+                }
+
+                endpoints.MapControllerRoute(
+                   name: "errorhandler",
+                   pattern: "oops/error/{statusCode?}",
+                   defaults: new { controller = "Oops", action = "Error" }
+                   );
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                    );
+
+
+            });
+
+
+
         }
 
         private void UseMvc(IApplicationBuilder app, bool useFolders)
         {
             app.UseMvc(routes =>
             {
-                routes.AddCloudscribeFileManagerRoutes();
+                //routes.AddCloudscribeFileManagerRoutes();
 
                 if (useFolders)
                 {
