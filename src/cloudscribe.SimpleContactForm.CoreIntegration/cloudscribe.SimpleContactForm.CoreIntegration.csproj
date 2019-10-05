@@ -2,20 +2,24 @@
 
   <PropertyGroup>
     <Description>Integration library for usingcloudscribe SimpleContactForm with cloudscribe.Core</Description>
-    <Version>4.0.0-preview20190902</Version>
+    <Version>4.0.0</Version>
     <Authors>Joe Audette</Authors>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <PackageTags>cloudscribe;contact form</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/joeaudette/cloudscribe.Entropy</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/cloudscribe/cloudscribe.SimpleContactForm</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\cloudscribe.SimpleContactForm\cloudscribe.SimpleContactForm.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="cloudscribe.Core.Models" Version="4.0.0-*" />
+    <PackageReference Include="cloudscribe.Core.Models" Version="4.0.0" />
   </ItemGroup>
 
 </Project>
