@@ -52,4 +52,4 @@ See appsettings.json in the WebApp for configuration, these are the settings:
       }
 	  
 
-Note that you should always get keys for Invisible Captcha, the Invisible Captcha keys work when configured both as visible anf invisible. Whereas keys not created for Invisible captcha won't work if you set invisible to true.
+Note that you should always get keys for Invisible Captcha, the Invisible Captcha keys work when configured both as visible and invisible. Whereas keys not created for Invisible captcha won't work if you set invisible to true.
