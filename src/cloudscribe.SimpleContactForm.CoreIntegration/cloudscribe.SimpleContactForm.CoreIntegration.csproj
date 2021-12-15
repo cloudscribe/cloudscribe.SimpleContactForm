@@ -19,7 +19,6 @@
     <ProjectReference Include="..\cloudscribe.SimpleContactForm\cloudscribe.SimpleContactForm.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <!--<PackageReference Include="cloudscribe.Core.Models" Version="4.1.0" />-->
     <PackageReference Include="cloudscribe.Core.Models" Version="5.0.0" />
   </ItemGroup>
 
