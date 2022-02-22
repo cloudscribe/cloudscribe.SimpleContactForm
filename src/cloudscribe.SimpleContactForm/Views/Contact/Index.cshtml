@@ -18,38 +18,38 @@
 <form id="contact-form" asp-controller="Contact" asp-action="Index">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="FormId" type="hidden" />
-    <div class="form-group">
+    <div class="mb-3">
         <label asp-for="Name">@sr["Name"]</label>
         <input asp-for="Name" class="form-control" placeholder="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <div class="form-group">
+    <div class="mb-3">
         <label asp-for="Email">@sr["Email"]</label>
         <input asp-for="Email" class="form-control" placeholder="Email" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-    <div class="form-group">
+    <div class="mb-3">
         <label asp-for="Message">@sr["Comment/Enquiry"]</label>
     </div>
-    <div class="form-group">
+    <div class="mb-3">
         <textarea asp-for="Message" rows="7" class="form-control"></textarea>
         <span asp-validation-for="Message" class="text-danger"></span>
     </div>
     @if (Model.RecaptchaPublicKey.Length > 0 && !Model.UseInvisibleCaptcha)
     {
-        <div class="form-group">
+        <div class="mb-3">
             <div class="g-recaptcha" data-sitekey="@Model.RecaptchaPublicKey"></div>
             @Html.ValidationMessage("recaptchaerror", new { @class = "text-danger" })
         </div>
     }
-    <div class="form-group">
+    <div class="mb-3">
 @if (Model.RecaptchaPublicKey.Length > 0 && Model.UseInvisibleCaptcha)
 {
-    <button class="btn btn-default btn-primary g-recaptcha" data-sitekey="@Model.RecaptchaPublicKey" data-callback='onCaptchaSubmit'>@sr["Submit"]</button>
+    <button class="btn btn-primary g-recaptcha" data-sitekey="@Model.RecaptchaPublicKey" data-callback='onCaptchaSubmit'>@sr["Submit"]</button>
 }
 else
 {
-    <button name="submit" type="submit" class="btn btn-default">@sr["Submit"]</button>
+    <button name="submit" type="submit" class="btn btn-primary">@sr["Submit"]</button>
 }
             
     </div>
