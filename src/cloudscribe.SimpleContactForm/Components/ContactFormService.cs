@@ -5,6 +5,7 @@
 // Last Modified:			2018-03-18
 // 
 
+using cloudscribe.Email;
 using cloudscribe.SimpleContactForm.Models;
 using cloudscribe.SimpleContactForm.ViewModels;
 using cloudscribe.Web.Common.Models;
@@ -19,22 +20,25 @@ namespace cloudscribe.SimpleContactForm.Components
     {
         public ContactFormService(
             IEnumerable<IProcessContactForm> messageProcessors,
-            IContactFormResolver contactFormResolver,
-            IRecaptchaKeysProvider recaptchaKeysProvider,
-            ILogger<ContactFormService> logger
+            IContactFormResolver             contactFormResolver,
+            IRecaptchaKeysProvider           recaptchaKeysProvider,
+            ILogger<ContactFormService>      logger,
+            IEmailSenderResolver             emailSenderResolver
             )
         {
             _contactFormResolver = contactFormResolver;
-            _recaptchaKeys = recaptchaKeysProvider;
-            _messageProcessors = messageProcessors;
-            _log = logger;
-        }
+            _recaptchaKeys       = recaptchaKeysProvider;
+            _messageProcessors   = messageProcessors;
+            _log                 = logger;
+            _emailSenderResolver = emailSenderResolver;
+    }
 
-        private IContactFormResolver _contactFormResolver;
-        private IRecaptchaKeysProvider _recaptchaKeys;
-        private ContactFormSettings _form = null;
+        private IContactFormResolver             _contactFormResolver;
+        private IRecaptchaKeysProvider           _recaptchaKeys;
+        private ContactFormSettings              _form = null;
         private IEnumerable<IProcessContactForm> _messageProcessors;
-        private ILogger _log;
+        private ILogger                          _log;
+        private IEmailSenderResolver             _emailSenderResolver;
 
         public async Task<ContactFormSettings> GetFormSettings()
         {
@@ -46,13 +50,15 @@ namespace cloudscribe.SimpleContactForm.Components
             return _form;
         }
 
-        public async Task<bool> IsConfigured()
+        public virtual async Task<bool> IsConfigured()
         {
             var form = await GetFormSettings().ConfigureAwait(false);
-            if(string.IsNullOrEmpty(form.NotificationEmailCsv)) { return false; }
+            // if(string.IsNullOrEmpty(form.NotificationEmailCsv)) { return false; }
 
-            //var smtpSettings = await smtpOptionsProvider.GetSmtpOptions().ConfigureAwait(false);
-            //if (string.IsNullOrEmpty(smtpSettings.Server)) { return false; }
+            var sender = await _emailSenderResolver.GetEmailSender();
+            if(sender == null) { return false; }
+
+            if (!await sender.IsConfigured()) { return false; }
 
             return true;
         }

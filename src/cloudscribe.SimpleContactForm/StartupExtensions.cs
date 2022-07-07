@@ -21,12 +21,10 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfiguration configuration,
             bool includeDefaultMessageProcessor = true)
         {
-
             
             services.Configure<RecaptchaKeys>(configuration.GetSection("RecaptchaKeys"));
             services.Configure<ContactFormMessageOptions>(configuration.GetSection("ContactFormMessageOptions"));
             services.Configure<ContactFormSettings>(configuration.GetSection("ContactFormSettings"));
-
 
            
             services.TryAddScoped<IRecaptchaKeysProvider, ConfigRecaptchaKeysProvider>();
@@ -35,6 +33,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddScoped<IContactFormResolver, ConfigContactFormResolver>();
             services.TryAddScoped<ITenantResolver, NullTenantResolver>();
             services.TryAddScoped<IPrePopulateContactForm, NotImplementedContactFromPopulator>();
+
             // pass in false if you want to implement custom logic for notification
             // instead of the built in logic
             // there can be multiple registered IProcessMessages implementations and all of them will be invoked
@@ -44,31 +43,10 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 services.AddScoped<IProcessContactForm, ContactFormProcessor>();
             }
-            
 
 
             return services;
         }
 
-        //[Obsolete("AddEmbeddedViewsForCloudscribeSimpleContactForm is deprecated, please use AddCloudscribeSimpleContactFormViews instead.")]
-        //public static RazorViewEngineOptions AddEmbeddedViewsForCloudscribeSimpleContactForm(this RazorViewEngineOptions options)
-        //{
-        //    options.FileProviders.Add(new EmbeddedFileProvider(
-        //            typeof(ContactFormService).GetTypeInfo().Assembly,
-        //            "cloudscribe.SimpleContactForm"
-        //        ));
-
-        //    return options;
-        //}
-
-        //public static RazorViewEngineOptions AddCloudscribeSimpleContactFormViews(this RazorViewEngineOptions options)
-        //{
-        //    options.FileProviders.Add(new EmbeddedFileProvider(
-        //            typeof(ContactFormService).GetTypeInfo().Assembly,
-        //            "cloudscribe.SimpleContactForm"
-        //        ));
-
-        //    return options;
-        //}
     }
 }
