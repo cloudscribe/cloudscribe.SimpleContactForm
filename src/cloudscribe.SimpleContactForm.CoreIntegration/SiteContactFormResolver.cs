@@ -21,7 +21,10 @@ namespace cloudscribe.SimpleContactForm.CoreIntegration
         public override async Task<ContactFormSettings> GetCurrentContactForm()
         {
             var form = await base.GetCurrentContactForm();
-            if (!string.IsNullOrWhiteSpace(_currentSite.AccountApprovalEmailCsv))
+
+            // if we require account approval and we don't have any contact form recipients in config,
+            // use the former recipient
+            if (!string.IsNullOrWhiteSpace(_currentSite.AccountApprovalEmailCsv) && string.IsNullOrWhiteSpace(form.NotificationEmailCsv))
             {
                 var newForm = new ContactFormSettings
                 {
@@ -36,6 +39,5 @@ namespace cloudscribe.SimpleContactForm.CoreIntegration
 
             return form;
         }
-
     }
 }
