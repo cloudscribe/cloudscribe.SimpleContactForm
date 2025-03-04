@@ -7,10 +7,11 @@ a simple yet flexible contact form for ASP.NET Core. Get the big picture on clou
 | Windows  | Linux/Mac |
 | ------------- | ------------- |
 | [![Build status](https://ci.appveyor.com/api/projects/status/b0erueoiou4oghev/branch/master?svg=true)](https://ci.appveyor.com/project/joeaudette/cloudscribe-simplecontactform/branch/master)  | [![Build Status](https://travis-ci.org/cloudscribe/cloudscribe.SimpleContactForm.svg?branch=master)](https://travis-ci.org/cloudscribe/cloudscribe.SimpleContactForm)  |
--->
-[![cloudscribe-simplecontactform-develop-nuget-build](https://github.com/cloudscribe/cloudscribe.SimpleContactForm/actions/workflows/cloudscribe-develop.yml/badge.svg?branch=develop&event=push)](https://github.com/cloudscribe/cloudscribe.SimpleContactForm/actions/workflows/cloudscribe-develop.yml)
 
-[![Contact Form Build](https://img.shields.io/github/actions/workflow/status/cloudscribe/cloudscribe.SimpleContactForm/cloudscribe-develop.yml?branch=develop&event=push&style=for-the-badge&label=📩%20Latest%20Develop%20Branch%20Build)](https://github.com/cloudscribe/cloudscribe.SimpleContactForm/actions/workflows/cloudscribe-develop.yml)
+[![cloudscribe-simplecontactform-develop-nuget-build](https://github.com/cloudscribe/cloudscribe.SimpleContactForm/actions/workflows/cloudscribe-develop.yml/badge.svg?branch=develop&event=push)](https://github.com/cloudscribe/cloudscribe.SimpleContactForm/actions/workflows/cloudscribe-develop.yml)
+-->
+
+[![Contact Form Build](https://img.shields.io/github/actions/workflow/status/cloudscribe/cloudscribe.SimpleContactForm/cloudscribe-develop.yml?branch=develop&event=push&style=for-the-badge&label=📩%20Develop%20Branch)](https://github.com/cloudscribe/cloudscribe.SimpleContactForm/actions/workflows/cloudscribe-develop.yml)
 
 
 It uses recaptcha unless you are authenticated.
