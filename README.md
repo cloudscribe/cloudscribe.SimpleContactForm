@@ -14,7 +14,7 @@ a simple yet flexible contact form for ASP.NET Core. Get the big picture on clou
 -->
 
 <!-- Making it prettier: -->
-[![Contact Form Build](https://img.shields.io/github/actions/workflow/status/cloudscribe/cloudscribe.SimpleContactForm/cloudscribe-develop.yml?branch=develop&event=push&style=social&label=📩%20Develop%20Branch)](https://github.com/cloudscribe/cloudscribe.SimpleContactForm/actions/workflows/cloudscribe-develop.yml)
+[![Contact Form Build](https://img.shields.io/github/actions/workflow/status/cloudscribe/cloudscribe.SimpleContactForm/cloudscribe-develop.yml?branch=develop&event=push&style=for-the-badge&label=📩🚀%20Develop%20Branch)](https://github.com/cloudscribe/cloudscribe.SimpleContactForm/actions/workflows/cloudscribe-develop.yml)
 
 
 It uses recaptcha unless you are authenticated.
