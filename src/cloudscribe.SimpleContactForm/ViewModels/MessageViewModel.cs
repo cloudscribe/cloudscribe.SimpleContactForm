@@ -15,15 +15,19 @@ namespace cloudscribe.SimpleContactForm.ViewModels
         public string FormId { get; set; }
 
         [Required(ErrorMessage = "The Name field is required.")]
+        [NoUrl(ErrorMessage = "URLs are not allowed in the Name field.")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "The Email field is required.")]
         [EmailAddress(ErrorMessage ="The Email field is not a valid email address.")]
+        [NoUrl(ErrorMessage = "URLs are not allowed in the Email field.")]
         public string Email { get; set; }
 
+        [NoUrl(ErrorMessage = "URLs are not allowed in the Subject field.")]
         public string Subject { get; set; }
 
         [Required(ErrorMessage = "The Message field is required.")]
+        [NoUrl(ErrorMessage = "URLs are not allowed in the Message field.")]
         public string Message { get; set; }
 
         public string RecaptchaPublicKey { get; set; } = string.Empty;
