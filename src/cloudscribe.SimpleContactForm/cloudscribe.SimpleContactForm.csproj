@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <Description>A simple contact form for ASP.NET Core</Description>
-    <Version>8.0.0</Version>
+    <Version>8.1.0</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Joe Audette</Authors>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
@@ -36,8 +36,8 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.0" />
-    <PackageReference Include="cloudscribe.Web.Common" Version="8.0.0" />
-    <PackageReference Include="cloudscribe.Email.Senders" Version="8.0.0" />
+    <PackageReference Include="cloudscribe.Web.Common" Version="8.1.0" />
+    <PackageReference Include="cloudscribe.Email.Senders" Version="8.1.0" />
   </ItemGroup>
 
 </Project>
