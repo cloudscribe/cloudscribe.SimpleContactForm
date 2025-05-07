@@ -26,7 +26,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.Configure<ContactFormMessageOptions>(configuration.GetSection("ContactFormMessageOptions"));
             services.Configure<ContactFormSettings>(configuration.GetSection("ContactFormSettings"));
 
-           
             services.TryAddScoped<IRecaptchaKeysProvider, ConfigRecaptchaKeysProvider>();
             services.AddScoped<ContactFormService, ContactFormService>();
             
