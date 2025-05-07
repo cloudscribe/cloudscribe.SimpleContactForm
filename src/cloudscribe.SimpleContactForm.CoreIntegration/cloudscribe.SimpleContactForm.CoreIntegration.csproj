@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Integration library for usingcloudscribe SimpleContactForm with cloudscribe.Core</Description>
-    <Version>8.1.0</Version>
+    <Version>8.2.0</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Joe Audette</Authors>
     <PackageTags>cloudscribe;contact form</PackageTags>
@@ -23,7 +23,7 @@
     <ProjectReference Include="..\cloudscribe.SimpleContactForm\cloudscribe.SimpleContactForm.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="cloudscribe.Core.Models" Version="8.1.0" />
+    <PackageReference Include="cloudscribe.Core.Models" Version="8.2.0" />
   </ItemGroup>
 
 </Project>
