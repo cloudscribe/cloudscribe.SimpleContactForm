@@ -24,11 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="cloudscribe.Core.Web" Version="8.4.*" />
-    <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap3" Version="8.4.0" />
-    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="8.4.0" />
-    <PackageReference Include="cloudscribe.Logging.Web" Version="8.4.0" />
-    <PackageReference Include="cloudscribe.Logging.NoDb" Version="8.4.0" />
+    <PackageReference Include="cloudscribe.Core.Web" Version="8.5.*" />
+    <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap5" Version="8.5.0" />
+    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="8.5.0" />
+    <PackageReference Include="cloudscribe.Logging.Web" Version="8.5.0" />
+    <PackageReference Include="cloudscribe.Logging.NoDb" Version="8.5.0" />
   </ItemGroup>
 
 </Project>
